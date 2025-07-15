@@ -1,3 +1,4 @@
+from functools import lru_cache
 from typing import Self
 
 from typing_extensions import override
@@ -28,5 +29,6 @@ class Mod3State(FSMState):
         raise InvalidTransitionException(self, ch)
 
   @classmethod
+  @lru_cache(maxsize=1)
   def get_all_possible_states(cls) -> set[Self]:
     return {member for member in cls.__members__.values()}

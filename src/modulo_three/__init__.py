@@ -12,11 +12,14 @@ Example:
     >>> mod_three("1111")  # 15 in decimal
     0
 """
+
 from modulo_three.modulo_three import ModuloThree
 
+__all__ = [
+    "mod_three",
+]
 
 def mod_three(binary_string: str) -> int:
-    return ModuloThree().run(binary_string)
-
-
-__version__ = "0.1.0" 
+    """ Calculate the remainder when dividing a binary number by 3. """
+    modulo_three = ModuloThree()
+    return modulo_three.run(binary_string)
