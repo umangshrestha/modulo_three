@@ -1,7 +1,7 @@
 from finite_state_machine.automation import FiniteAutomation
 from finite_state_machine.exception import InvalidAlphabetException
 from finite_state_machine.state import FSMState
-from modulo_three.utils.state import Mod3State
+from modulo_three.state import Mod3State
 
 initial_state = Mod3State.S0
 

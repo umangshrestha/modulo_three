@@ -7,7 +7,6 @@ class InvalidFinalStateException(BaseException):
     def __init__(self,
         state: FSMState,
         acceptable_final_states: list[FSMState],
-        acceptable_alphabets: list[str]
     ) -> None:
         message = f"Invalid final state: {state}\n"
         message += f"Acceptable final states: {acceptable_final_states}"

@@ -3,7 +3,7 @@ import pytest
 from finite_state_machine.exception import InvalidAlphabetException
 from modulo_three import mod_three
 from modulo_three.modulo_three import ModuloThree
-from modulo_three.utils.state import Mod3State
+from modulo_three.state import Mod3State
 
 
 def cheap_mod_three(binary_string: str) -> int:
@@ -54,27 +54,22 @@ def test_mod_three_invalid_input(binary_string: str):
         mod_three(binary_string)
 
 def test_singleton_pattern():
-    """Test that ModuloThree follows singleton pattern"""
     instance1 = ModuloThree()
     instance2 = ModuloThree()
     assert instance1 is instance2
 
 def test_state_reset_on_new_instance():
-    """Test that getting existing instance resets state to initial"""
     instance1 = ModuloThree()
-    instance1.run("1")  # Should be in state S1
-    instance2 = ModuloThree()  # Should reset to S0
+    instance1.run("1")
+    instance2 = ModuloThree() 
     assert instance2.state == Mod3State.S0
 
 def test_state_persistence():
-    """Test that state is maintained between runs"""
     fsm = ModuloThree()
     
-    # Run "1" - should end in state S1 (remainder 1)
     fsm.run("1")
     assert fsm.state == Mod3State.S1
     
-    # Run "1" again - should end in state S0 (remainder 0)
     fsm.run("1")
     assert fsm.state == Mod3State.S0
 

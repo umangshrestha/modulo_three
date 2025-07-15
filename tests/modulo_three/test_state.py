@@ -1,4 +1,4 @@
-from modulo_three.utils.state import Mod3State
+from modulo_three.state import Mod3State
 from finite_state_machine.exception import InvalidTransitionException
 import pytest
 

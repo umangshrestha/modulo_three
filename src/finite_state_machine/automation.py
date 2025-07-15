@@ -30,7 +30,6 @@ class FiniteAutomation:
             raise InvalidFinalStateException(
                 self.state,
                 self.acceptable_final_states,
-                self.acceptable_alphabets
             )
         return self.state.get_value()
 
