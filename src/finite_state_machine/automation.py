@@ -15,10 +15,10 @@ class FiniteAutomation:
         self.acceptable_final_states = acceptable_final_states 
 
     def is_acceptable_final_state(self, state: FSMState) -> bool:
-        return self.acceptable_final_states is None or state in self.acceptable_final_states
+        return state in self.acceptable_final_states
     
     def is_valid_alphabet(self, _input: Alphabet) -> bool:
-        return self.acceptable_alphabets is None or _input in self.acceptable_alphabets
+        return _input in self.acceptable_alphabets
     
     def run(self, _input: list[Alphabet]) -> FinalValue:
         for i, char in enumerate(_input):
@@ -27,6 +27,10 @@ class FiniteAutomation:
             self.state = self.state.next_state(char)
 
         if not self.is_acceptable_final_state(self.state):
-            raise InvalidFinalStateException(self.state, self.acceptable_final_states)
+            raise InvalidFinalStateException(
+                self.state,
+                self.acceptable_final_states,
+                self.acceptable_alphabets
+            )
         return self.state.get_value()
 

@@ -14,4 +14,6 @@ class FSMState(Enum):
         return self.value
 
     def next_state(self, _input: Alphabet) -> Self:
-        raise NotImplementedError(f"next_state is not implemented for {self.__class__.__name__}")
+        class_name = self.__class__.__name__
+        raise NotImplementedError(
+            f"next_state is not implemented for {class_name}")

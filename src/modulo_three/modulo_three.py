@@ -9,21 +9,27 @@ class ModuloThree(FiniteAutomation):
     _instance = None
 
     def __init__(self) -> None:
-        super().__init__(initial_state)
-
+        super().__init__(
+            initial_state=initial_state,
+            acceptable_alphabets={'0', '1'},
+            acceptable_final_states=Mod3State.get_all_possible_states()
+        )
 
     def is_valid_alphabet(self, _input: str) -> bool:
-        return _input == '0' or _input == '1'
+        return _input in self.acceptable_alphabets
 
     def run(self, _input: str) -> FSMState:
-        if not isinstance(_input, str):
+        if not isinstance(_input, str) or not _input:
             raise InvalidAlphabetException(_input, 0)
         return super().run(_input)
 
+    def reset_state(self) -> None:
+        self.state = initial_state
+
     def __new__(cls, *args, **kwargs):
-        """ Singleton pattern to ensure only one instance of the class is created. """
+        """ Singleton pattern """
         if cls._instance is None:
             cls._instance = super().__new__(cls, *args, **kwargs)
         else:
-            cls._instance.state =  initial_state
+            cls._instance.reset_state()
         return cls._instance
