@@ -11,6 +11,7 @@ maintainers = [
 dynamic = ["version"]
 requires-python = ">=3.11,<3.13"
 dependencies = [
+    "typing-extensions>=4.14.1",
 ]
 readme = "README.md"
 license = {text = "MIT"}
@@ -38,7 +39,7 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["modulo_three"]
+include = ["modulo_three", "finite_state_machine"]
 exclude = ["tests*"]
 
 [tool.setuptools_scm]
@@ -82,4 +83,9 @@ ignore = [
 [tool.ruff.lint.flake8-bugbear]
 
 [tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "INFO"
 pythonpath = ["src"]
+testpaths = [
+    "tests",
+]
