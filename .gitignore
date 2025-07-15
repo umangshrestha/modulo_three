@@ -18,3 +18,4 @@ _version.py
 *.egg-info
 build/
 dist/
+test-coverage/
