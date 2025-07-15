@@ -16,3 +16,5 @@ _version.py
 .coverage
 .coverage.*
 *.egg-info
+build/
+dist/

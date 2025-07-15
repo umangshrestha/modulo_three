@@ -1,7 +1,7 @@
 from enum import Enum
-from typing import Self, TypeVar
+from typing import Self
 
-T = TypeVar('T')
+from .types import Alphabet, FinalValue
 
 
 class FSMState(Enum): 
@@ -10,5 +10,8 @@ class FSMState(Enum):
     def __str__(self) -> str:
         return self.name
     
-    def next_state(self, _input: T) -> Self:
+    def get_value(self) -> FinalValue:
+        return self.value
+
+    def next_state(self, _input: Alphabet) -> Self:
         raise NotImplementedError(f"next_state is not implemented for {self.__class__.__name__}")

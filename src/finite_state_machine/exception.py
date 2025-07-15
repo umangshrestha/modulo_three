@@ -1,8 +1,6 @@
-from typing import TypeVar
 
 from .state import FSMState
-
-T = TypeVar('T')
+from .types import Alphabet
 
 
 class BaseException(Exception):
@@ -10,9 +8,22 @@ class BaseException(Exception):
     pass
 
 
-
 class InvalidTransitionException(BaseException):
     """ Exception raised for invalid transition. """
-    def __init__(self, state: FSMState, _input: T) -> None:
+    def __init__(self, state: FSMState, _input: Alphabet) -> None:
         message = f"Invalid transition: {state} -> {_input}"
+        super().__init__(message)
+
+
+class InvalidFinalStateException(BaseException):
+    """ Exception raised for invalid final state. """
+    def __init__(self, state: FSMState, acceptable_final_states: list[FSMState]) -> None:
+        message = f"Invalid final state: {state}\nAcceptable final states: {acceptable_final_states}"
+        super().__init__(message)
+
+
+class InvalidAlphabetException(BaseException):
+    """ Exception raised for invalid alphabet. """
+    def __init__(self, _input: Alphabet, position: int) -> None:
+        message = f"Invalid alphabet: {_input} at position {position}"
         super().__init__(message)

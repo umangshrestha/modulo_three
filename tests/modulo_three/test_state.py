@@ -8,7 +8,7 @@ import pytest
     (Mod3State.S2, 2),
 ])
 def test_mod3_state_output_value(state: Mod3State, expected: int):
-    assert state.value == expected
+    assert state.get_value() == expected
 
 
 @pytest.mark.parametrize("state, input, expected", [
@@ -31,6 +31,11 @@ def test_mod3_state_next_state(state: Mod3State, input: str, expected: Mod3State
 def test_mod3_state_next_state_invalid_input(state: Mod3State, input: str):
     with pytest.raises(InvalidTransitionException):
         state.next_state(input)
+
+
+def test_mod3_state_get_available_state():
+    assert Mod3State.get_all_possible_states() == {Mod3State.S0, Mod3State.S1, Mod3State.S2}
+
 
 
 

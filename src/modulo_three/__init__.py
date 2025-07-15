@@ -12,9 +12,11 @@ Example:
     >>> mod_three("1111")  # 15 in decimal
     0
 """
+from modulo_three.modulo_three import ModuloThree
 
-def modulo_three(binary_string: str) -> int:
-    return 0
+
+def mod_three(binary_string: str) -> int:
+    return ModuloThree().run(binary_string)
 
 
 __version__ = "0.1.0" 

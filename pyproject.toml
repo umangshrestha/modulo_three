@@ -29,8 +29,7 @@ classifiers = [
 tests = [
     "ruff==0.11.7",
     "pytest>=8.4.1",
-    "unittest-xml-reporting==3.2.0",
-    "coverage==7.8.0",
+    "pytest-cov>=6.2.1"
 ]
 included = []
 
@@ -85,7 +84,16 @@ ignore = [
 [tool.pytest.ini_options]
 log_cli = true
 log_cli_level = "INFO"
+addopts = "--junitxml=test-coverage/junit.xml --cov --cov-report xml:test-coverage/coverage.xml --cov-report html:test-coverage/html"
 pythonpath = ["src"]
 testpaths = [
     "tests",
+]
+
+
+[tool.coverage.run]
+branch = true
+source = [
+    "modulo_three",
+    "finite_state_machine",
 ]

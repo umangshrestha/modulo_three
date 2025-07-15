@@ -12,6 +12,10 @@ class Mod3State(FSMState):
   S2 = 2
 
   @override
+  def get_value(self) -> int:
+    return self.value
+
+  @override
   def next_state(self, ch: str) -> Self:
     match (self, ch):
       case (Mod3State.S0, '0') | (Mod3State.S1, '1'):
@@ -22,4 +26,7 @@ class Mod3State(FSMState):
         return Mod3State.S2
       case _:
         raise InvalidTransitionException(self, ch)
-      
+
+  @classmethod
+  def get_all_possible_states(cls) -> set[Self]:
+    return {member for member in cls.__members__.values()}

@@ -7,7 +7,7 @@ Please install [UV](https://docs.astral.sh/uv/getting-started/installation/#stan
 uv venv --python 3.11
 source .venv/bin/activate
 uv sync
-uv pip install .
+uv pip install ".[tests]"
 ```
 
 
@@ -16,10 +16,7 @@ uv pip install .
 uv build
 ```
 
-# Run unittest
+# Run unittest with coverage
 ```sh
 uv run pytest
 ```
-
-
-# Integration Test
