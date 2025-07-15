@@ -1,0 +1,85 @@
+[build-system]
+requires = ["setuptools >= 79", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "modulo_three"
+description = "This project computes the modulo of a binary string input."
+maintainers = [
+    {name = "Umang Shrestha", email="umangshrestha09@gmail.com"}
+]
+dynamic = ["version"]
+requires-python = ">=3.11,<3.13"
+dependencies = [
+]
+readme = "README.md"
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.optional-dependencies]
+tests = [
+    "ruff==0.11.7",
+    "pytest>=8.4.1",
+    "unittest-xml-reporting==3.2.0",
+    "coverage==7.8.0",
+]
+included = []
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["modulo_three"]
+exclude = ["tests*"]
+
+[tool.setuptools_scm]
+version_scheme = "post-release"
+local_scheme = "node-and-date"
+write_to = "src/modulo_three/_version.py"
+
+[tool.ruff]
+include = [
+    "src/**/*.py",
+]
+exclude = [
+    "tests/**"
+]
+line-length = 120
+indent-width = 4
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+ignore = [
+    "SIM116",
+    "E501",
+    "B017",
+    "B026"
+]
+
+[tool.ruff.lint.flake8-bugbear]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
