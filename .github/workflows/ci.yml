@@ -24,8 +24,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          uv pip install --system ruff
-          uv pip install --system -e .
+          uv pip install --system .
+          uv pip install --system ".[tests]"
 
       - name: Run Ruff
         run: |
