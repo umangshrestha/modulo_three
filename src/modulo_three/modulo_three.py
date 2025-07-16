@@ -3,6 +3,7 @@ from typing_extensions import override
 from finite_state_machine.automation import FiniteAutomation
 from finite_state_machine.exception import InvalidInputException
 from modulo_three.state import Mod3State
+from modulo_three.utils import remove_leading_zeros
 
 initial_state = Mod3State.S0
 
@@ -24,16 +25,11 @@ class ModuloThree(FiniteAutomation):
     def reset_state(self) -> None:
         self.state = initial_state
 
-    @staticmethod
-    def remove_leading_zeros(_input: str) -> str:
-        """Remove leading zeros as they don't affect the result."""
-        trimmed = _input.lstrip("0")
-        return trimmed if trimmed else "0"
-
     @override
     def process(self, _input: str) -> None:
         if not self.is_valid_input(_input):
             raise InvalidInputException(_input, self.acceptable_alphabets)
+        _input = remove_leading_zeros(_input)
         self.state = self.state.next_state(_input)
 
     def __new__(cls, *args, **kwargs):

@@ -6,6 +6,7 @@ from finite_state_machine.exception import InvalidInputException
 from modulo_three import mod_three
 from modulo_three.modulo_three import ModuloThree
 from modulo_three.state import Mod3State, TRANSITION_CACHE
+from modulo_three.utils import remove_leading_zeros
 
 
 def cheap_mod_three(binary_string: str) -> int:
@@ -86,3 +87,19 @@ def test_very_long_inputs(binary_string: str):
     assert mod_three(binary_string) == cheap_mod_three(binary_string)
 
     
+@pytest.mark.parametrize("binary_string, expected_output", [
+    ("0", "0"),
+    ("1", "1"),
+    ("", "0"),
+    ("00000", "0"),
+    ("00001", "1"),
+    ("00010", "10"),
+    ("00011", "11"),
+    ("00100", "100"),
+    ("00101", "101"),
+    ("00110", "110"),
+    ("00111", "111"),
+    ("01000", "1000"),
+])
+def test_remove_leading_zeros(binary_string: str, expected_output: str):
+    assert remove_leading_zeros(binary_string) == expected_output

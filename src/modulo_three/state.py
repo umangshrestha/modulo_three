@@ -18,9 +18,11 @@ class Mod3State(FSMState):
 
     @override
     def next_state(self, ch: str) -> Self:
+        """Input needs to be validated before calling this method."""
         cache_key = (self, ch)
         if result := TRANSITION_CACHE.get(cache_key):
             return result
+
         if not ch:
             raise InvalidTransitionException(self, ch)
 
@@ -39,7 +41,7 @@ class Mod3State(FSMState):
 
 
 # Pre-computed transitions for single-bit inputs
-# Format: (current_state, input_bit) -> next_state
+# Format: (current_state, input) -> next_state
 TRANSITION_CACHE: dict[tuple[Mod3State, str], Mod3State] = {
     (Mod3State.S0, "0"): Mod3State.S0,
     (Mod3State.S0, "1"): Mod3State.S1,
