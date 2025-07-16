@@ -1,4 +1,8 @@
-from .exception import InvalidFinalStateException, InvalidInitialStateException
+from .exception import (
+    InvalidFinalStateException,
+    InvalidInitialStateException,
+    InvalidInputException,
+)
 from .state import FSMState
 from .types import Alphabet, FinalValue
 
@@ -23,7 +27,7 @@ class FiniteAutomation:
         return all(char in self.acceptable_alphabets for char in _input)
 
     def process(self, _input: list[Alphabet], /, **kwargs) -> None:
-        """Default process method is iterative with O(n) time complexity for all scenarios"""
+        """Default process method is iterative with O(n) time complexity for all case"""
         if not self.is_valid_input(_input):
             raise InvalidInputException(_input, self.acceptable_alphabets)
 
