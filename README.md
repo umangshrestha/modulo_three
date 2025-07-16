@@ -10,7 +10,6 @@ uv sync
 uv pip install ".[tests]"
 ```
 
-
 ## Build the project
 ```sh
 uv build
@@ -23,9 +22,8 @@ uv run pytest
 
 ## To pass manual input
 ```sh
- python3 main.py 101
+python3 main.py 101
 ```
-
 
 # Optimizations
 
@@ -39,5 +37,24 @@ The codebase has been optimized by
    - Optimized state transitions using constant-time lookups
    - Automatic state reset on instance reuse
 
-## State Transitions::
-   - removed leading 0's to prevent reduntant state transistions 
+## Transition Caching with Divide & Conquer:
+   - Uses global TRANSITION_CACHE to store computed state transitions
+   - Cache key: (current_state, input_string) → next_state
+   - Implements divide-and-conquer strategy for longer inputs:
+ 
+## Performance Characteristics:
+   - Time Complexity: 
+     * First encounter: O(log n) due to divide-and-conquer
+     * Cached lookups: O(1)
+   - Space Complexity: O(k) where k is number of unique transitions
+   - Cache Benefits:
+     * Reuses common patterns
+     * Avoids recomputation
+     * Improves with usage
+
+## Implementation Details:
+   - Base transitions defined for single bits
+   - Recursive divide-and-conquer for longer strings
+   - Global cache persists across instances
+   - No size limit on cached transitions
+   - Handles any input length efficiently 

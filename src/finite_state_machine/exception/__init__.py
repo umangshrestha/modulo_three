@@ -1,10 +1,10 @@
-from .invalid_alphabet import InvalidAlphabetException
 from .invalid_final_state import InvalidFinalStateException
 from .invalid_initial_state import InvalidInitialStateException
+from .invalid_input import InvalidInputException
 from .invalid_transition import InvalidTransitionException
 
 __all__ = [
-    "InvalidAlphabetException",
+    "InvalidInputException",
     "InvalidFinalStateException",
     "InvalidTransitionException",
     "InvalidInitialStateException",

@@ -19,7 +19,9 @@ __all__ = [
     "mod_three",
 ]
 
+
 def mod_three(binary_string: str) -> int:
-    """ Calculate the remainder when dividing a binary number by 3. """
+    """Calculate the remainder when dividing a binary number by 3."""
     modulo_three = ModuloThree()
-    return modulo_three.run(binary_string)
+    modulo_three.process(binary_string)
+    return modulo_three.get_final_state()

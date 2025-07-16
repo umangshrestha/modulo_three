@@ -1,9 +1,11 @@
+import gc
 import pytest
+from sys import getsizeof
 
-from finite_state_machine.exception import InvalidAlphabetException
+from finite_state_machine.exception import InvalidInputException
 from modulo_three import mod_three
 from modulo_three.modulo_three import ModuloThree
-from modulo_three.state import Mod3State
+from modulo_three.state import Mod3State, TRANSITION_CACHE
 
 
 def cheap_mod_three(binary_string: str) -> int:
@@ -50,7 +52,7 @@ def test_mod_three(binary_string: str):
     [1, 2, 3],
 ])
 def test_mod_three_invalid_input(binary_string: str):
-    with pytest.raises(InvalidAlphabetException):
+    with pytest.raises(InvalidInputException):
         mod_three(binary_string)
 
 def test_singleton_pattern():
@@ -60,17 +62,17 @@ def test_singleton_pattern():
 
 def test_state_reset_on_new_instance():
     instance1 = ModuloThree()
-    instance1.run("1")
+    instance1.process("1")
     instance2 = ModuloThree() 
     assert instance2.state == Mod3State.S0
 
 def test_state_persistence():
     fsm = ModuloThree()
     
-    fsm.run("1")
+    fsm.process("1")
     assert fsm.state == Mod3State.S1
     
-    fsm.run("1")
+    fsm.process("1")
     assert fsm.state == Mod3State.S0
 
 @pytest.mark.parametrize("binary_string", [
@@ -82,3 +84,5 @@ def test_state_persistence():
 def test_very_long_inputs(binary_string: str):
     """Test handling of very long input strings"""
     assert mod_three(binary_string) == cheap_mod_three(binary_string)
+
+    

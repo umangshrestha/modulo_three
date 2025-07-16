@@ -1,4 +1,4 @@
-
 class BaseException(Exception):
-    """ Base exception for the  Finite State Machine package. """
+    """Base exception for the  Finite State Machine package."""
+
     pass

@@ -3,10 +3,10 @@ from .base_exception import BaseException
 
 
 class InvalidInitialStateException(BaseException):
-    """ Exception raised for invalid initial state. """
+    """Exception raised for invalid initial state."""
+
     def __init__(self, state: FSMState) -> None:
         message = (
-            f"Invalid initial state: {state}\n"
-            f"Inital state should implement FSMState"
+            f"Invalid initial state: {state}\nInital state should implement FSMState"
         )
         super().__init__(message)
