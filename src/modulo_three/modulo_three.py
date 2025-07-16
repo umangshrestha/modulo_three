@@ -1,4 +1,4 @@
-from typing import override
+from typing_extensions import override
 
 from finite_state_machine.automation import FiniteAutomation
 from finite_state_machine.exception import InvalidInputException
@@ -34,7 +34,6 @@ class ModuloThree(FiniteAutomation):
     def process(self, _input: str) -> None:
         if not self.is_valid_input(_input):
             raise InvalidInputException(_input, self.acceptable_alphabets)
-
         self.state = self.state.next_state(_input)
 
     def __new__(cls, *args, **kwargs):

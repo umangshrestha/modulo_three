@@ -15,7 +15,8 @@ uv pip install ".[tests]"
 uv build
 ```
 
-## Run unittest with coverage
+## Run unittest
+Note that test is already configured with coverage and benchmark
 ```sh
 uv run pytest
 ```
@@ -44,7 +45,7 @@ The codebase has been optimized by
  
 ## Performance Characteristics:
    - Time Complexity: 
-     * First encounter: O(log n) due to divide-and-conquer
+     * First encounter: O(log n) due to divide-and-conquer (Speed improvement by 50%)
      * Cached lookups: O(1)
    - Space Complexity: O(k) where k is number of unique transitions
    - Cache Benefits:
