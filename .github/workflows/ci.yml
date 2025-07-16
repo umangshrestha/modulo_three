@@ -31,10 +31,6 @@ jobs:
         run: |
           ruff check . --fix
 
-      - name: Build package
-        run: |
-          uv run build
-
       - name: Run tests
         run: |
-          uv run pytest 
+          python -m pytest  --junitxml=test-coverage/junit.xml --cov --cov-report xml:test-coverage/coverage.xml --cov-report html:test-coverage/html
