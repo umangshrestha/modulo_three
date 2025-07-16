@@ -1,4 +1,3 @@
-"""Benchmark tests for ModuloThree implementation."""
 import random
 from typing import Callable
 
@@ -13,7 +12,6 @@ def generate_binary_string(length: int) -> str:
 
 
 def cheap_mod_three(binary_string: str) -> int:
-    """Simple implementation for comparison."""
     return int(binary_string, 2) % 3
 
 
@@ -49,15 +47,14 @@ def test_mod_three_patterns(benchmark: Callable, pattern: str, size: int):
 
 def test_mod_three_cached_transitions(benchmark: Callable):
     """Benchmark to verify caching effectiveness."""
-    # Test with a repeated pattern that should benefit from caching
-    binary_string = "1010" * 250  # 1000 bits with repeating pattern
+    binary_string = "1010" * 250
     
     result = benchmark(mod_three, binary_string)
     assert result == cheap_mod_three(binary_string)
 
 
 @pytest.mark.parametrize("input_string", [
-    "1" * 100,      # All ones
+    "1" * 100,
     "0" + "1" * 99, # Leading zero
     "1" + "0" * 99, # Leading one
 ])
