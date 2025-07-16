@@ -1,3 +1,5 @@
+from typing import override
+
 from finite_state_machine.automation import FiniteAutomation
 from finite_state_machine.exception import InvalidAlphabetException
 from finite_state_machine.state import FSMState
@@ -15,21 +17,33 @@ class ModuloThree(FiniteAutomation):
             acceptable_final_states=Mod3State.get_all_possible_states()
         )
 
-    def is_valid_alphabet(self, _input: str) -> bool:
-        return _input in self.acceptable_alphabets
-
-    def run(self, _input: str) -> FSMState:
-        if not isinstance(_input, str) or not _input:
-            raise InvalidAlphabetException(_input, 0)
-        return super().run(_input)
+    @override
+    def is_valid_input(self, _input: str) -> bool:
+        return (
+            isinstance(_input, str)
+            and _input 
+            and all(char in self.acceptable_alphabets for char in _input)
+        )
 
     def reset_state(self) -> None:
         self.state = initial_state
+
+    @override
+    def run(self, _input: str) -> FSMState:
+        if not self.is_valid_input(_input):
+            raise InvalidAlphabetException(_input, 0)
+        _input = self.remove_trailing_zeros(_input)
+        return super().run(_input)
+
+
+    def remove_trailing_zeros(self, _input: str) -> str:
+        return _input.lstrip('0')
 
     def __new__(cls, *args, **kwargs):
         """ Singleton pattern """
         if cls._instance is None:
             cls._instance = super().__new__(cls, *args, **kwargs)
         else:
+            # Reset the state to the initial state
             cls._instance.reset_state()
         return cls._instance
