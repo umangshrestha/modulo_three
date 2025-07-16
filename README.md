@@ -38,7 +38,7 @@ The codebase has been optimized by
    - Optimized state transitions using constant-time lookups
    - Automatic state reset on instance reuse
    - Uses global TRANSITION_CACHE to store computed state transitions
-   - Implements leading zero removal to prevent unnecessary hit to the cache. (Speed improvement by ~10%)
+   - Implements leading zero removal to prevent unnecessary hits to the cache. (Cache improvement by ~10%)
 
  
 ## Performance Characteristics:
